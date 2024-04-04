@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Header({ cart }) {
   // State derivado
   const isEmpty = () => cart.length === 0;
@@ -86,5 +88,9 @@ function Header({ cart }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  cart: PropTypes.array,
+};
 
 export default Header;

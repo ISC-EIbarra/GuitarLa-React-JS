@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Guitar({ guitars, addToCart }) {
   const { id, name, image, description, price } = guitars;
 
@@ -25,5 +27,10 @@ function Guitar({ guitars, addToCart }) {
     </div>
   );
 }
+
+Guitar.propTypes = {
+  guitars: PropTypes.object,
+  addToCart: PropTypes.func,
+};
 
 export default Guitar;
