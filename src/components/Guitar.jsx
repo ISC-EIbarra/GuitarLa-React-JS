@@ -1,9 +1,5 @@
-function Guitar({ guitars }) {
+function Guitar({ guitars, addToCart }) {
   const { id, name, image, description, price } = guitars;
-
-  const handleClick = (guitars) => {
-    console.log(guitars);
-  };
 
   return (
     <div className="col-md-6 col-lg-4 my-4 row align-items-center">
@@ -21,7 +17,7 @@ function Guitar({ guitars }) {
         <button
           type="button"
           className="btn btn-dark w-100"
-          onClick={() => handleClick(guitars)}
+          onClick={() => addToCart(guitars)}
         >
           Agregar al Carrito
         </button>
