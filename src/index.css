@@ -703,6 +703,7 @@ button:not(:disabled),
 
 .text-center {
   text-align: center !important;
+  margin: 0;
 }
 
 .text-uppercase {
@@ -780,13 +781,6 @@ button:not(:disabled),
   }
 }
 .header {
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7)
-    ),
-    url('../img/header.jpg');
-  /** TODO: Eliminar la sig linea **/
   background-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.7),

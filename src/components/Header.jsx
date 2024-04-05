@@ -1,10 +1,19 @@
 import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 
-function Header({ cart }) {
+function Header({
+  cart,
+  removeToCart,
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+}) {
   // State derivado
-  const isEmpty = () => cart.length === 0;
-  const cartTotal = () =>
-    cart.reduce((total, item) => total + item.quantity * item.price, 0);
+  const isEmpty = useMemo(() => cart.length === 0, [cart]);
+  const cartTotal = useMemo(
+    () => cart.reduce((total, item) => total + item.quantity * item.price, 0),
+    [cart]
+  );
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -27,7 +36,7 @@ function Header({ cart }) {
               />
 
               <div id="carrito" className="bg-white p-3">
-                {isEmpty() ? (
+                {isEmpty ? (
                   <p className="text-center">El carrito esta vacio</p>
                 ) : (
                   <>
@@ -54,16 +63,28 @@ function Header({ cart }) {
                             <td>{car.name}</td>
                             <td className="fw-bold">${car.price}</td>
                             <td className="flex align-items-start gap-4">
-                              <button type="button" className="btn btn-dark">
+                              <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={() => decreaseQuantity(car.id)}
+                              >
                                 -
                               </button>
                               {car.quantity}
-                              <button type="button" className="btn btn-dark">
+                              <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={() => increaseQuantity(car.id)}
+                              >
                                 +
                               </button>
                             </td>
                             <td>
-                              <button className="btn btn-danger" type="button">
+                              <button
+                                className="btn btn-danger"
+                                type="button"
+                                onClick={() => removeToCart(car.id)}
+                              >
                                 X
                               </button>
                             </td>
@@ -72,10 +93,12 @@ function Header({ cart }) {
                       </tbody>
                     </table>
                     <p className="text-end">
-                      Total pagar:{' '}
-                      <span className="fw-bold">${cartTotal()}</span>
+                      Total pagar: <span className="fw-bold">${cartTotal}</span>
                     </p>
-                    <button className="btn btn-dark w-100 mt-3 p-2">
+                    <button
+                      className="btn btn-dark w-100 mt-3 p-2"
+                      onClick={clearCart}
+                    >
                       Vaciar Carrito
                     </button>
                   </>
@@ -91,6 +114,10 @@ function Header({ cart }) {
 
 Header.propTypes = {
   cart: PropTypes.array,
+  removeToCart: PropTypes.func,
+  increaseQuantity: PropTypes.func,
+  decreaseQuantity: PropTypes.func,
+  clearCart: PropTypes.func,
 };
 
 export default Header;
